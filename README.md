@@ -20,7 +20,8 @@
     - [Before starting](#before-starting)
       - [Who are you?](#who-are-you)
       - [Line endings](#line-endings)
-    - [Using `git` command](#using-git-command)
+      - [Default text editor](#default-text-editor)
+    - [Using the `git` command](#using-the-git-command)
     - [Starting a new repository](#starting-a-new-repository)
     - [`.gitignore`](#gitignore)
     - [README and your first commit](#readme-and-your-first-commit)
@@ -28,6 +29,10 @@
       - [Remote tracking](#remote-tracking)
       - [Cloning](#cloning)
   - [Command-line Advanced](#command-line-advanced)
+    - [Branches](#branches)
+    - [Merging](#merging)
+    - [Merge Conflicts](#merge-conflicts)
+    - [Resetting](#resetting)
   - [Reference](#reference)
     - [Terminology](#terminology)
     - [Commands](#commands)
@@ -152,7 +157,23 @@ git config --global core.autocrlf true
 ```
 This will configure Git to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
 
-### Using `git` command
+#### Default text editor
+
+By default, `git` will probably be associated with `vim`. This is a hard to use command-line only text editor if you've never used it before. However, if you have a cheat sheet available or someone to help you, it can be pretty easy to get around in once you know the commands and keyboard shortcuts. However, not everyone will want to use `vim`. Maybe you like `nano`, or maybe you'd rather use something graphical like Atom or VS Code. Well, this command is for you:
+```
+git config --global core.editor "path/to/editor --wait_flag"
+```
+This is a little generic and might not be very useful without context. `git` will only open a text editor up if it needs input for a reason or another. Most commonly, this will happen when you make a new commit and don't specify a message. That means the text editor will need to be opened in a specific way for it to integrate with `git` properly. Here are some common editors and their respective commands:
+- Atom:
+  - `git config --global core.editor "atom --wait"`
+- VS Code:
+  - `git config --global core.editor "code --wait"`
+- Sublime Text:
+  - `git config --global core.editor "'C:/Program Files (x86)/sublime text 3/subl.exe' -w"`
+- Notepad++:
+  - `git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`
+
+### Using the `git` command
 
 While the rest of this tutorial will go into setting up a repo and so on, the most helpful thing you should know is how to get to the help menu.
 
@@ -258,6 +279,130 @@ This concludes the basics of `git` command-line. You know how to make new repos 
 Now, onto the stuff everyone has questions about.
 
 ## Command-line Advanced
+
+### Branches
+
+`git` keeps a timeline of code, and timelines can branch. This is effectively parallel universes. In one universe, your coin got heads, in the branching universe, it got tails. The same is true with `git`. A branch is a split copy of the code with different changes than the main copy, typically for development and organizational purposes. It's smart to branch your code so that collaborators don't get in each other's ways.
+
+This can also be set up as a protection measure. Say you want to keep `main` as your default stable branch. Only code that is functional and builds is in `main`. To keep this true, you make a new branch named `dev` that you regularly push changes to. If someone pushes something to `dev` that happens to break the code, then the code in `main` is safe and untouched. When the code in `dev` has been thoroughly tested and is ready to be pulled into `main`, a merge is performed, or a pull request made.
+
+Anyways, there are a number of way to view, switch, and manage branches in a repository. The basic command that manages and views branches is:
+```
+git branch
+```
+Make sure you run this without anything after the `branch`. This will list all branches available locally. However, if you wanna see branches on the remote as well, you will first need to run:
+```
+git fetch --all
+```
+which will get all the meta-data for every branch. Now, if you run `git branch`, you will see all of the branches both locally and on remote.
+
+Now, say you want to create a new branch:
+```
+git branch BRANCH_NAME
+```
+where `BRANCH_NAME` is the name of the branch you would like to create. Once created, you can now manage it.
+
+Let's say you accidentally created it and now you need to delete it:
+```
+git branch -d BRANCH_NAME
+```
+
+Maybe you just misnamed the branch, you can rename it like so:
+```
+git branch -m OLD_BRANCH NEW_BRANCH
+```
+This is actually a move command. Similar to Unix systems, there's not dedicated
+
+What if you want to switch to switch to a newly created branch? You need to check it out:
+```
+git checkout BRANCH_NAME
+```
+If you run `git status`, it will tell you what branch you are tracking.
+
+Now, programmers are lazy, so they made a shortcut to both create and switch to a branch in one go:
+```
+git checkout -b BRANCH_NAME
+```
+The `-b` flag tells `checkout` to create the branch you want to check out.
+
+The last key to all of this is making the new branch visible on remote. To do so, you need to push any new commits on the branches with a new push command:
+```
+git push origin BRANCH_NAME
+```
+This will tell `push` to push to the URL at `origin` and to push the branch `BRANCH_NAME`.
+
+So, you can create, view, check out, and manage branches. What if you have been on a branch a while and now want to merge the changes into another branch.
+
+### Merging
+
+There are a number of methods you can "merge" branches. The classic is a simple `merge` command however.
+
+What you need to do is `checkout` the branch you wish to merge *into*. Then, you will need to `merge` from the branch you specify:
+```
+git merge BRANCH_NAME
+```
+where BRANCH_NAME is the branch you wish to merge *from* in to the *current* branch. This is important. The branch you have checked out that is printed in `git status` will have `BRANCH_NAME` merged into it.
+
+Once the merge completes, you may need to commit changes (it may prompt you automatically for a commit message), and then you need to push the changes.
+
+Merging can be a nasty process however, which may lead to something called a *merge conflict*. This is what all users of `git` dread.
+
+### [Merge Conflicts](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts)
+
+Oh no! You tried to pull changes from remote or you just tried merging branches and you just got a *merge conflict*. What do you do? Do you delete you repository and re-clone? Do you scream in agony because all of your work is destroyed?
+
+Maybe. At least that's what I did before I understood the flow `git` requires to keep things smooth. 
+
+First. How to prevent merge conflict hell when pulling new code.
+1. `git add changed_files`
+2. `git commit`
+3. `git pull`
+4. MERGE CONFLICT!
+
+But this is fine. You just committed your code. You can simply run:
+```
+git merge --abort
+```
+if you want to cancel the merge, which should resolve and undo the merge request.
+
+Even if you didn't commit you code before hand, or you were merging two branches, you can still try to `git merge --abort` to undo the changes. This will not always work however, so keep that in mind. If you're *really* paranoid, you can make a backup of your local repo before you decide to pull changes or make any merges, just so that you have a way to get back to an old working repo.
+
+But you will inevitably have to merge code anyways. You need the newest changes anyways, so how do you manually merge files?
+
+Well, `git` came up with a way to signify changes between commits in files. If you're using a graphical program (which I would recommend exactly for this problem), then you can see code diffs (differences) and then choose which segment of code you wish to keep between files. This is still a long process and takes a while to complete, but it's still much better than the alternative:
+1. Generate a list of the files affected by the merge conflict using `git status`. In this example, the file styleguide.md has a merge conflict.
+```
+> # On branch branch-b
+> # You have unmerged paths.
+> #   (fix conflicts and run "git commit")
+> #
+> # Unmerged paths:
+> #   (use "git add ..." to mark resolution)
+> #
+> # both modified:      styleguide.md
+> #
+> no changes added to commit (use "git add" and/or "git commit -a")
+```
+2. Open your favorite text editor, and navigate to the file that has merge conflicts. Some text editors and IDEs have plugins that make it easier to manage and see all the places you have conflicts. VS Code is a good option for instance.
+3. To see the beginning of the merge conflict in your file, search the file for the conflict marker `<<<<<<<`. When you open the file in your text editor, you'll see the changes from the HEAD or base branch after the line `<<<<<<< HEAD`. Next, you'll see `=======`, which divides your changes from the changes in the other branch, followed by `>>>>>>> BRANCH-NAME`. In this example, one person wrote "open an issue" in the base or HEAD branch and another person wrote "ask your question in IRC" in the compare branch or branch-a.
+```
+If you have questions, please
+<<<<<<< HEAD
+open an issue
+=======
+ask your question in IRC.
+>>>>>>> branch-a
+```
+4. Decide if you want to keep only your branch's changes, keep only the other branch's changes, or make a brand new change, which may incorporate changes from both branches. Delete the conflict markers <<<<<<<, =======, >>>>>>> and make the changes you want in the final merge. In this example, both changes are incorporated into the final merge:
+```
+If you have questions, please open an issue or ask in our IRC channel if it's more urgent.
+```
+5. Now, you need to add, or stage the files you've fixed using `git add .`
+6. And finally, `git commit` and `git push`.
+
+What if you made some changes but decided you didn't like them, and now you can't pull new changes from remote because you haven't committed your changes? That's where `reset` comes into play.
+
+### Resetting
 
 *WIP*
 
