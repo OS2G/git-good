@@ -36,8 +36,8 @@
     - [Resetting](#resetting)
     - [Reverting](#reverting)
     - [Rebasing](#rebasing)
-    - [Pull Requests](#pull-requests)
     - [Forking](#forking)
+    - [Pull Requests](#pull-requests)
   - [Reference](#reference)
     - [Terminology](#terminology)
     - [Commands](#commands)
@@ -422,9 +422,17 @@ There are a few use cases for it however.
 
 ### Rebasing
 
-### Pull Requests
-
 ### Forking
+
+Forking is a simple but useful tool. The nice thing about `git` is that you can publish code online. While you do have the ability keep your repo private, many people like hosting public projects. In a way, it's like a portfolio, showing off your achievements and work with a history of the steps you took to get there. More importantly, it encourages collaboration.
+
+What if you want to make changes to someone's repository you have no maintainer access to? While a public repository will always let you clone the repo, you will not be able to push any changes unless you were given permission to do so. This is where forking comes in. A fork in a road is a branch into two paths. By "forking" the project, you create a fork in the road where the project now takes on a different direction. This direction is led by you, the forker. There are a number of reasons you may want to fork a project. The two most common are:
+1. The project's maintainer no longer maintains the code. You wish to continue where she left off, so you fork and continue the work.
+2. You wish to make a pull request.
+
+Forking isn't done within `git` however. You need to go to the website, such as GitHub, and click the fork button on a repository. You can manually "fork" however by cloning, setting a new remote, and pushing the code to the new remote. However, this is all done with the website automatically, so it's much easier that way.
+
+### Pull Requests
 
 ## Reference
 
