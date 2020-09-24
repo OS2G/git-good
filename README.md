@@ -20,10 +20,14 @@
     - [Before starting](#before-starting)
       - [Who are you?](#who-are-you)
       - [Line endings](#line-endings)
+    - [Using `git` command](#using-git-command)
     - [Starting a new repository](#starting-a-new-repository)
     - [`.gitignore`](#gitignore)
     - [README and your first commit](#readme-and-your-first-commit)
     - [Remote repositories](#remote-repositories)
+      - [Remote tracking](#remote-tracking)
+      - [Cloning](#cloning)
+  - [Command-line Advanced](#command-line-advanced)
   - [Reference](#reference)
     - [Terminology](#terminology)
     - [Commands](#commands)
@@ -148,6 +152,14 @@ git config --global core.autocrlf true
 ```
 This will configure Git to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
 
+### Using `git` command
+
+While the rest of this tutorial will go into setting up a repo and so on, the most helpful thing you should know is how to get to the help menu.
+
+`git --help` will open up a documentation or print out the possible commands. This can then be extended to something like `git init --help` which will give you specific documentation on the `init` subcommand.
+
+Another very useful command is `git status`. This will query the local repository for changes and status, printing them out.
+
 ### Starting a new repository
 
 Contrary to popular belief, you don't need an online or remote repository to get started. `git` is a distributed code management system. That means that every copy of a git repository can act as a remote for any other copy. You can even change the remote with ease or have multiple remotes (mirrors). Because of this, let's start with making a repository from scratch.
@@ -200,6 +212,52 @@ Finally, the push. You can do this after a number of commits, but if you're work
 But wait, we never set up a remote for our `git` to track! Your `git push` probably failed with some message about no remote to track. Indeed, the next step is to set up a remote repository.
 
 ### Remote repositories
+
+#### Remote tracking
+
+So, now that you have a running `git` repo, you want to now push it somewhere online to live. Keep in mind that you can do this with any currently populated folder. A great example of this is that you started to add code and you now want to turn it into a `git` repo. You can run `git init`, `git add .`, `git commit` and be ready to push it to a remote repo. But first, we need to set the remote.
+
+Before you set it however, you need to create it within the remote tracker. There are many `git` services, the most popular being GitHub, followed by GitLab and probably BitBucket. There are many smaller ones, or you can even set up your own on a server.
+
+Let's say you want to do this on GitHub. First, you will need an account. Once you register and login, you can then create a new one by clicking the "+" in the upper right corner or by finding the "New" button. You can also visit [github.com/new](https://github.com/new). 
+
+Once there, name it whatever you want. Set it to private or public, and ***DO NOT*** initialize your repository. Just create an empty one. We do this so that you can push an already existing repo to GitHub.
+
+Now to finally set up remote tracking:
+```
+git remote add origin REMOTE_URL
+```
+where `REMOTE_URL` is the url of the online, uninitialized git repository.
+
+Once done, rerun the `git push` command. It will aks you for your credentials (GitHub username and password), and then it will push up the changes. If all went well, you can refresh the online repository, and you should now have the changes posted.
+
+What if you already had a remote however and you wanted to change it to a new one? Say you made a project on GitLab and you want to move it to GitHub. Same story. Set up an uninitialized GitHub repo and then run:
+```
+git remote set-url origin REMOTE_URL
+```
+Then push like before.
+
+Ok. You can now initialize local folders as `git` repos as well as push then to new online hosts. What if you want to get a repo hosted online to use on your local machine?
+
+#### Cloning
+
+This is simple. In fact, if you don't want to initialize local repos and then push changes online, it might be easier to first initialize a repo online and then clone.
+
+To clone, run the following:
+```
+git clone REMOTE_URL
+```
+where `REMOTE_URL` is the `git` url of the remote repository hosted online. This will clone it into a new folder by the name of the `.git` file that the URL had. e.g. `https://github.com/OS2G/git-good.git` will clone into a new folder named `git-good`. If `git-good` already exists, the clone will fail. Your option is to clone elsewhere, or instead, specify the name. You can do this like so:
+```
+git clone REMOTE_URL OUTPUT_DIR
+```
+where `OUTPUT_DIR` is the name of the folder you would like to clone into.
+
+This concludes the basics of `git` command-line. You know how to make new repos and get existing ones, how to make new commits, pull changes, and push your own. You also know you can always get help for every command as well as get the status of the repo.
+
+Now, onto the stuff everyone has questions about.
+
+## Command-line Advanced
 
 *WIP*
 
