@@ -406,6 +406,19 @@ What if you made some changes but decided you didn't like them, and now you can'
 
 *WIP*
 
+### Advanced Source Control
+#### Branches
+#### Stash/Pop
+#### Reset, Revert, and Rebase
+#### Merge
+
+### Source of Truth
+#### Pull Requests
+#### Forking
+
+
+- 
+
 ## Reference
 
 ### Terminology
@@ -450,7 +463,7 @@ All of these sub-commands have to be started with `git`. e.g. `git status`.
 | `reset` | Resets the current branch to a certain state or commit. |
 
 ### Other Tutorials and Websites
-
+#### Generic
 - https://git-scm.com/book/en/v2
 - https://git-scm.com/docs
 - https://docs.github.com/en/github/using-git
