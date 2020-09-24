@@ -31,12 +31,18 @@
   - [Command-line Advanced](#command-line-advanced)
     - [Branches](#branches)
     - [Merging](#merging)
+    - [Stash/Pop](#stashpop)
     - [Merge Conflicts](#merge-conflicts)
     - [Resetting](#resetting)
+    - [Reverting](#reverting)
+    - [Rebasing](#rebasing)
+    - [Pull Requests](#pull-requests)
+    - [Forking](#forking)
   - [Reference](#reference)
     - [Terminology](#terminology)
     - [Commands](#commands)
     - [Other Tutorials and Websites](#other-tutorials-and-websites)
+      - [Generic](#generic)
 
 
 This tutorial and reference is in no way exhaustive. However, we do hope you still find it useful. Start here, however if you can't find the answer to your question *~~Google~~ DuckDuckGo is your friend*.
@@ -347,6 +353,8 @@ Once the merge completes, you may need to commit changes (it may prompt you auto
 
 Merging can be a nasty process however, which may lead to something called a *merge conflict*. This is what all users of `git` dread.
 
+### Stash/Pop
+
 ### [Merge Conflicts](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts)
 
 Oh no! You tried to pull changes from remote or you just tried merging branches and you just got a *merge conflict*. What do you do? Do you delete you repository and re-clone? Do you scream in agony because all of your work is destroyed?
@@ -404,20 +412,19 @@ What if you made some changes but decided you didn't like them, and now you can'
 
 ### Resetting
 
+There are times you want to undo changes you have made to a git repo. This can be within git as it's tracking files, or maybe the physical files themselves. This is where `git reset` comes into play. It is a *dangerous* command. It can be destructive if you do something wrong.
+
+There are a few use cases for it however.
+
 *WIP*
 
-### Advanced Source Control
-#### Branches
-#### Stash/Pop
-#### Reset, Revert, and Rebase
-#### Merge
+### Reverting
 
-### Source of Truth
-#### Pull Requests
-#### Forking
+### Rebasing
 
+### Pull Requests
 
-- 
+### Forking
 
 ## Reference
 
