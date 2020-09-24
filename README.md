@@ -434,6 +434,27 @@ Forking isn't done within `git` however. You need to go to the website, such as 
 
 ### Pull Requests
 
+So, let's say you wanna contribute to a public (or for that matter private) project, but maybe you don't have maintainer access? Maybe a branch has write protections, so adding code requires that you make a formal pull request and have people view the changes before it gets pulled in.
+
+Well, that's why we're here. While it [*is* possible](https://git-scm.com/docs/git-request-pull) to do this all from command line, it's much easier and cleaner to use a little bit of web help to get it done.
+
+Let's say you want to push to a public repository you have no maintainer access to:
+1. Fork the repository
+2. Create a new branch on the fork
+3. Commit your changes on the new branch
+4. Push to the fork so that it's public
+5. Go online and start a pull request where the source is you fork:newbranch and the destination is the original:branch.
+Now you wait.
+
+What if you have maintainer access and you wish to make a pull request to pull in new code from your current branch to a different branch? This is the same as merging, but it's blocked until pulled in manually online (or command line by someone who has override access):
+1. Create a new branch from the branch you wish to make changes.
+2. Commit your changes on the new branch
+3. Push to the new branch.
+4. Go online and start a pull request where the source is original:newbranch and destination is original:oldbranch
+Now you wait.
+
+What if you want to want to test a pull request? Well, typically, a pull request creates a new branch you can play around with. This is a good way to play around with the code and see if you end up with any issues after manually merging. All you need to do is know what the new branch is, check it out, and now you can see the new code and play with it. If you like the changes, you can merge them into the branch that the pull request was trying to merge with, and then push the changes. This will close the pull request and note it as "merged". You can also take care of it online.
+
 ## Reference
 
 ### Terminology
