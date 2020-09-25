@@ -401,7 +401,7 @@ open an issue
 ask your question in IRC.
 >>>>>>> branch-a
 ```
-4. Decide if you want to keep only your branch's changes, keep only the other branch's changes, or make a brand new change, which may incorporate changes from both branches. Delete the conflict markers <<<<<<<, =======, >>>>>>> and make the changes you want in the final merge. In this example, both changes are incorporated into the final merge:
+4. Decide if you want to keep only your branch's changes, keep only the other branch's changes, or make a brand new change, which may incorporate changes from both branches. Delete the conflict markers `<<<<<<<`, `=======`, `>>>>>>>` and make the changes you want in the final merge. In this example, both changes are incorporated into the final merge:
 ```
 If you have questions, please open an issue or ask in our IRC channel if it's more urgent.
 ```
@@ -416,9 +416,20 @@ There are times you want to undo changes you have made to a git repo. This can b
 
 There are a few use cases for it however.
 
+First, you need to understand what `git reset` does. In general, it moves `HEAD` (the current commit) to a previous specified commit.
+
 *WIP*
 
 ### Reverting
+
+Sometimes you made a commit but you don't want to destructively remove history like resetting does. This is perfect for code changes you found out caused a bug and there's no sensitive information you need to remove. That's where `git revert` comes into play. What it does is "reverts" a specified commit with a new commit, undoing changes:
+
+1. Find out what commit you want to undo
+2. Copy it's hash: `COMMIT_HASH`
+3. Run `git revert COMMIT_HASH`
+4. `git push` the changes up.
+
+What you will see is a new commit that notes you have undone the commit specified as `COMMIT_HASH`. This means that the current working code no longer has the changes from `COMMIT_HASH` but the history will. This is useful if you would like to keep your changes in the history for reference or completeness. In general, it's good to keep history rather than rewrite it.
 
 ### Rebasing
 
