@@ -355,6 +355,26 @@ Merging can be a nasty process however, which may lead to something called a *me
 
 ### Stash/Pop
 
+What if you made changes you wish to save for later? Or maybe you need to pull new code, but you don't want to commit what you currently have? That's where stashing and popping comes in:
+
+1. Make some changes to files
+2. `git stash` your changes for now
+3. `git pull` or something of that sort
+4. `git stash pop` to get your changes back
+
+This is a very nice feature. No longer do you need to copy your code into a temporary location to get the latest changes. You can just *stash* them away onto a stack for later. Once you're ready to get those changes back, you just *pop* them off the stack and keep working.
+
+This can get more complex where you stash many sets of codes at different points of history. This can be useful if you wish to keep an idea *stashed* away for later through many pulls. Or maybe you just need to keep changes on a specific branch without committing, so you *stash* them for that branch, and then check out a new one. You can even bring code between branches:
+
+1. `git stash` your changes for now
+2. `git checkout BRANCH` or something of that sort
+3. `git stash pop` to get your changes back
+
+The stashes are given a hash to keep track of them. If you want to give them names, just add a name, or description, with the stash command:
+```
+git stash "description of name"
+```
+
 ### [Merge Conflicts](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts)
 
 Oh no! You tried to pull changes from remote or you just tried merging branches and you just got a *merge conflict*. What do you do? Do you delete you repository and re-clone? Do you scream in agony because all of your work is destroyed?
@@ -432,6 +452,10 @@ Sometimes you made a commit but you don't want to destructively remove history l
 What you will see is a new commit that notes you have undone the commit specified as `COMMIT_HASH`. This means that the current working code no longer has the changes from `COMMIT_HASH` but the history will. This is useful if you would like to keep your changes in the history for reference or completeness. In general, it's good to keep history rather than rewrite it.
 
 ### Rebasing
+
+While merging combines two branches together, rebasing adjust a branch given a specific set of instructions. You can call it the advanced version of `git merge`. Not only can it combine multiple branches, it's able to move branches along history, compress commits into one, and so on.
+
+*WIP*
 
 ### Forking
 
