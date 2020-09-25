@@ -153,6 +153,11 @@ git config user.name "Linus Torvalds"
 git config user.email "linus@null.dev"
 ```
 
+You can view your changes by typing:
+```
+git config --global --edit
+```
+
 #### [Line endings](https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings)
 
 If you plan to work with others, or even different systems, you will inevitably run into a line ending issue. Windows and Unix based systems (Linux/macOS) specify what the end of a line should be denoted as. In UNIX it's `LF` while in windows it's `CRLF`. Because of this, certain windows programs won't know what to do with files made in UNIX and the same goes for some UNIX programs with Windows files.
