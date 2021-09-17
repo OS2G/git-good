@@ -99,7 +99,7 @@ You will need to add additional repositories to use the latest versions, but oth
 yum install git
 ```
 
-###### version 8, from the default repositories
+###### Version 8, from the default repositories
 
 ```
 dnf install git
@@ -139,7 +139,7 @@ If you're running the installer, you will be bombarded with a lot of options for
 
 ### Graphical Solutions
 
-If you're like most people, you'll want an easy way to run git. This doesn't mean you'll be able to do everything using buttons, but your most common tasks can be done so.
+If you're like most people, you'll want an easy way to run `git`. This doesn't mean you'll be able to do everything using buttons, but your most common tasks can be done so.
 
 #### Git for Windows
 
@@ -156,6 +156,12 @@ GitKraken is a proprietary solution. They've got a free version that allows you 
 #### IDE Integrations
 
 Many IDEs and even text editors have integrations for `git`. They are far from equal however. IntelliJ IDEA has a fairly well made one with a very good code diff function, as does VS Code and Atom. That's as much as I know however. Some IDEs have some pretty bad integrations, like eclipse. You might be better off just grabbing something like GitHub Desktop or just using the command line.
+
+#### Lists of GUI (and TUI) Tools
+
+- [GIT - GUI Clients](https://git-scm.com/downloads/guis/)
+- [Interfaces, frontends, and tools - Git SCM Wiki](https://git.wiki.kernel.org/index.php/InterfacesFrontendsAndTools)
+
 
 ## Command-line Basics
 
