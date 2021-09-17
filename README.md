@@ -6,8 +6,12 @@
   - [How does one get it?](#how-does-one-get-it)
     - [Command-line Solutions](#command-line-solutions)
       - [Linux](#linux)
-        - [Debian based](#debian-based)
-        - [Arch based](#arch-based)
+        - [Arch-based](#arch-based)
+        - [Debian-based](#debian-based)
+        - [RHEL-based](#rhel-based)
+          - [Version 7](#version-7)
+          - [Version 8](#version-8)
+        - [openSUSE](#opensuse)
         - [The rest](#the-rest)
       - [macOS](#macos)
       - [Windows](#windows)
@@ -16,6 +20,7 @@
       - [GitHub Desktop](#github-desktop)
       - [GitKraken](#gitkraken)
       - [IDE Integrations](#ide-integrations)
+      - [Lists of GUI and TUI Tools](#lists-of-gui-and-tui-tools)
   - [Command-line Basics](#command-line-basics)
     - [Before starting](#before-starting)
       - [Who are you?](#who-are-you)
@@ -89,17 +94,23 @@ sudo pacman -S git
 sudo apt install git
 ```
 
-##### RHEL-based (Red Hat Enterprise Linux, CentOS, ...)
+##### RHEL-based
+
+RHEL is **R**ed **H**at **E**nterprise **L**inux.  The family includes distributions like CentOS, Rocky Linux, AlmaLinux and others.
 
 You will need to add additional repositories to use the latest versions, but otherwise ...
 
-###### Version 7, from the default repositories
+###### Version 7
+
+From the default repositories:
 
 ```
 yum install git
 ```
 
-###### Version 8, from the default repositories
+###### Version 8
+
+From the default repositories:
 
 ```
 dnf install git
@@ -115,7 +126,7 @@ zypper install git
 
 ##### The rest
 
-You can look them up on [Repology](https://repology.org/project/git/versions).  Sometimes distributions *split* a single application as multiple packages, so you may not get the documentation or the GUI in the default package.  Sometimes packages from add-on or 3rd-party repositories don't use the expected, common, name for an application (*cough* RHEL).  You will have to explore and figure out how your distribution chose to package `git`.
+You can look them up on [Repology](https://repology.org/project/git/versions).  Sometimes distributions *split* a single application as multiple packages, so you may not get the documentation or the GUI in the default package.  Sometimes packages from add-on or 3rd-party repositories don't use the expected, common, name for an application (*&lt;cough&gt;* RHEL).  You will have to explore and figure out how your distribution chose to package `git`.
 
 #### macOS
 
@@ -157,7 +168,7 @@ GitKraken is a proprietary solution. They've got a free version that allows you 
 
 Many IDEs and even text editors have integrations for `git`. They are far from equal however. IntelliJ IDEA has a fairly well made one with a very good code diff function, as does VS Code and Atom. That's as much as I know however. Some IDEs have some pretty bad integrations, like eclipse. You might be better off just grabbing something like GitHub Desktop or just using the command line.
 
-#### Lists of GUI (and TUI) Tools
+#### Lists of GUI and TUI Tools
 
 - [GIT - GUI Clients](https://git-scm.com/downloads/guis/)
 - [Interfaces, frontends, and tools - Git SCM Wiki](https://git.wiki.kernel.org/index.php/InterfacesFrontendsAndTools)
