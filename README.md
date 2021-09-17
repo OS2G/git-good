@@ -77,21 +77,45 @@ If you're on Linux or macOS, you might already have it. Just open up a Terminal 
 
 This depends entirely on your distribution.
 
-##### Debian based
-
-```
-sudo apt install git
-```
-
-##### Arch based
+##### Arch-based
 
 ```
 sudo pacman -S git
 ```
 
+##### Debian-based
+
+```
+sudo apt install git
+```
+
+##### RHEL-based (Red Hat Enterprise Linux, CentOS, ...)
+
+You will need to add additional repositories to use the latest versions, but otherwise ...
+
+###### Version 7, from the default repositories
+
+```
+yum install git
+```
+
+###### version 8, from the default repositories
+
+```
+dnf install git
+```
+
+##### openSUSE
+
+Tumbleweed always has the latest version; Leap does not.
+
+```
+zypper install git
+```
+
 ##### The rest
 
-Either add it in, or just look it up. Arch and Debian are the two I know off the top of my head ;)
+You can look them up on [Repology](https://repology.org/project/git/versions).  Sometimes distributions *split* a single application as multiple packages, so you may not get the documentation or the GUI in the default package.  Sometimes packages from add-on or 3rd-party repositories don't use the expected, common, name for an application (*cough* RHEL).  You will have to explore and figure out how your distribution chose to package `git`.
 
 #### macOS
 
@@ -102,12 +126,14 @@ brew install git
 
 #### Windows
 
-You can get it via the installer [here](https://git-scm.com/download/win). Or you can install it trough Chocolatey:
+You can get it via the installer [here](https://gitforwindows.org/) or [here](https://git-scm.com/download/win). Or you can install it through Chocolatey:
+
 ```
-choco install git
+choco install git.install
 ```
 
 If you're running the installer, you will be bombarded with a lot of options for configuration. You can leave the defaults and be good to go, or you can tune it to your liking. What I recommend is that you:
+
 1. Don't install the graphical front end
 2. Set it up to keep the same line endings as remote (Windows and UNIX have different ways of telling applications when a line ends)
 
@@ -160,13 +186,13 @@ git config --global --edit
 
 #### [Line endings](https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings)
 
-If you plan to work with others, or even different systems, you will inevitably run into a line ending issue. Windows and Unix based systems (Linux/macOS) specify what the end of a line should be denoted as. In UNIX it's `LF` while in windows it's `CRLF`. Because of this, certain windows programs won't know what to do with files made in UNIX and the same goes for some UNIX programs with Windows files.
+If you plan to work with others, or even different systems, you will inevitably run into a line ending issue. Windows and Unix-based systems (Linux/macOS) specify what the end of a line should be denoted as. In UNIX it's `LF` while in windows it's `CRLF`. Because of this, certain Windows programs won't know what to do with files made in UNIX and the same goes for some UNIX programs with Windows files.
 
 Thankfully, `git` has a way to fix this. I recommend just letting `git` take care of it:
 ```
 git config --global core.autocrlf true
 ```
-This will configure Git to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
+This will configure `git` to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
 
 #### Default text editor
 
