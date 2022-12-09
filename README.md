@@ -6,8 +6,12 @@
   - [How does one get it?](#how-does-one-get-it)
     - [Command-line Solutions](#command-line-solutions)
       - [Linux](#linux)
-        - [Debian based](#debian-based)
-        - [Arch based](#arch-based)
+        - [Arch-based](#arch-based)
+        - [Debian-based](#debian-based)
+        - [RHEL-based](#rhel-based)
+          - [Version 7](#version-7)
+          - [Version 8](#version-8)
+        - [openSUSE](#opensuse)
         - [The rest](#the-rest)
       - [macOS](#macos)
       - [Windows](#windows)
@@ -16,6 +20,7 @@
       - [GitHub Desktop](#github-desktop)
       - [GitKraken](#gitkraken)
       - [IDE Integrations](#ide-integrations)
+      - [Lists of GUI and TUI Tools](#lists-of-gui-and-tui-tools)
   - [Command-line Basics](#command-line-basics)
     - [Before starting](#before-starting)
       - [Who are you?](#who-are-you)
@@ -77,21 +82,51 @@ If you're on Linux or macOS, you might already have it. Just open up a Terminal 
 
 This depends entirely on your distribution.
 
-##### Debian based
-
-```
-sudo apt install git
-```
-
-##### Arch based
+##### Arch-based
 
 ```
 sudo pacman -S git
 ```
 
+##### Debian-based
+
+```
+sudo apt install git
+```
+
+##### RHEL-based
+
+RHEL is **R**ed **H**at **E**nterprise **L**inux.  The family includes distributions like CentOS, Rocky Linux, AlmaLinux and others.
+
+You will need to add additional repositories to use the latest versions, but otherwise ...
+
+###### Version 7
+
+From the default repositories:
+
+```
+yum install git
+```
+
+###### Version 8
+
+From the default repositories:
+
+```
+dnf install git
+```
+
+##### openSUSE
+
+Tumbleweed always has the latest version; Leap does not.
+
+```
+zypper install git
+```
+
 ##### The rest
 
-Either add it in, or just look it up. Arch and Debian are the two I know off the top of my head ;)
+You can look them up on [Repology](https://repology.org/project/git/versions).  Sometimes distributions *split* a single application as multiple packages, so you may not get the documentation or the GUI in the default package.  Sometimes packages from add-on or 3rd-party repositories don't use the expected, common, name for an application (*&lt;cough&gt;* RHEL).  You will have to explore and figure out how your distribution chose to package `git`.
 
 #### macOS
 
@@ -102,18 +137,20 @@ brew install git
 
 #### Windows
 
-You can get it via the installer [here](https://git-scm.com/download/win). Or you can install it trough Chocolatey:
+You can get it via the installer [here](https://gitforwindows.org/) or [here](https://git-scm.com/download/win). Or you can install it through Chocolatey:
+
 ```
-choco install git
+choco install git.install
 ```
 
 If you're running the installer, you will be bombarded with a lot of options for configuration. You can leave the defaults and be good to go, or you can tune it to your liking. What I recommend is that you:
+
 1. Don't install the graphical front end
 2. Set it up to keep the same line endings as remote (Windows and UNIX have different ways of telling applications when a line ends)
 
 ### Graphical Solutions
 
-If you're like most people, you'll want an easy way to run git. This doesn't mean you'll be able to do everything using buttons, but your most common tasks can be done so.
+If you're like most people, you'll want an easy way to run `git`. This doesn't mean you'll be able to do everything using buttons, but your most common tasks can be done so.
 
 #### Git for Windows
 
@@ -130,6 +167,12 @@ GitKraken is a proprietary solution. They've got a free version that allows you 
 #### IDE Integrations
 
 Many IDEs and even text editors have integrations for `git`. They are far from equal however. IntelliJ IDEA has a fairly well made one with a very good code diff function, as does VS Code and Atom. That's as much as I know however. Some IDEs have some pretty bad integrations, like eclipse. You might be better off just grabbing something like GitHub Desktop or just using the command line.
+
+#### Lists of GUI and TUI Tools
+
+- [GIT - GUI Clients](https://git-scm.com/downloads/guis/)
+- [Interfaces, frontends, and tools - Git SCM Wiki](https://git.wiki.kernel.org/index.php/InterfacesFrontendsAndTools)
+
 
 ## Command-line Basics
 
@@ -160,13 +203,13 @@ git config --global --edit
 
 #### [Line endings](https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings)
 
-If you plan to work with others, or even different systems, you will inevitably run into a line ending issue. Windows and Unix based systems (Linux/macOS) specify what the end of a line should be denoted as. In UNIX it's `LF` while in windows it's `CRLF`. Because of this, certain windows programs won't know what to do with files made in UNIX and the same goes for some UNIX programs with Windows files.
+If you plan to work with others, or even different systems, you will inevitably run into a line ending issue. Windows and Unix-based systems (Linux/macOS) specify what the end of a line should be denoted as. In UNIX it's `LF` while in windows it's `CRLF`. Because of this, certain Windows programs won't know what to do with files made in UNIX and the same goes for some UNIX programs with Windows files.
 
 Thankfully, `git` has a way to fix this. I recommend just letting `git` take care of it:
 ```
 git config --global core.autocrlf true
 ```
-This will configure Git to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
+This will configure `git` to ensure line endings in files you checkout are correct for Windows. For compatibility, line endings are converted to Unix style when you commit files.
 
 #### Default text editor
 
